@@ -25,7 +25,7 @@ export default {
 
       const db = c1.database();
 
-      const  student= db.collection("students").get().then(res => {
+      db.collection("students").get().then(res => {
         
   
          console.log(res.data)
