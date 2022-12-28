@@ -25,9 +25,13 @@ export default {
 
       const db = c1.database();
 
+      db.collection('students').add({
+         data:{
+           'ss':'hello'
+         }
+      });
+
       db.collection("students").get().then(res => {
-        
-  
          console.log(res.data)
      })      
 
