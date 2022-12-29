@@ -6,6 +6,7 @@ import VueRouter from 'vue-router'
 // 引入一下用到的组件 
 import Table from '../components/Table'
 import Login from '../components/Login'
+import Edit from '../components/Edit'
  
 // 第二步创建router实例对象并暴露
 export default new VueRouter({
@@ -21,6 +22,12 @@ export default new VueRouter({
             path: "/table",
             //跳转的组件
             component: Table
+        },
+        {
+            // path是路径
+            path: "/edit",
+            //跳转的组件
+            component: Edit
         }     
     ]
 })

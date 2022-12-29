@@ -31,7 +31,7 @@
 export default {
     data(){
         return{
-             name: 'Login',
+         
             loginFrom:{
                 username:'yaoyuan',
                 password:'1225670760'

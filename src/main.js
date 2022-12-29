@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui';
 import VueRouter from 'vue-router'
+import global from './Global.vue'
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.use(VueRouter)
@@ -10,9 +11,10 @@ Vue.use(VueRouter)
 import router from './router'
 
 Vue.config.productionTip = false
+Vue.prototype.cloud = window.cloud
+Vue.prototype.APPID = global.APPID
+Vue.prototype.ENVID = global.ENVID
 
-const c = window.cloud
-Vue.prototype.cloud = c
 
 
 new Vue({
