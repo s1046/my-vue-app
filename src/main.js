@@ -4,6 +4,8 @@ import ElementUI from 'element-ui';
 import VueRouter from 'vue-router'
 import global from './Global.vue'
 import 'element-ui/lib/theme-chalk/index.css';
+import utils from './common/utils.js'
+
 Vue.use(ElementUI);
 Vue.use(VueRouter)
 
@@ -14,6 +16,7 @@ Vue.config.productionTip = false
 Vue.prototype.cloud = window.cloud
 Vue.prototype.APPID = global.APPID
 Vue.prototype.ENVID = global.ENVID
+Vue.prototype.utils = utils
 
 
 

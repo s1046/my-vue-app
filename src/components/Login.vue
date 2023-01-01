@@ -15,7 +15,7 @@
       </el-form-item>
       <!-- 按鈕 -->
         <el-form-item  class="btns">
-         <el-button type="primary">登录</el-button>
+         <el-button type="primary" @click="login">登录</el-button>
          <el-button type="info" @click="resetLoginForm">重置</el-button>
       </el-form-item>
     </el-form>
@@ -33,8 +33,8 @@ export default {
         return{
          
             loginFrom:{
-                username:'yaoyuan',
-                password:'1225670760'
+                username:'',
+                password:''
             },
              LoginfromRules:{
                    // 验证用户名是否合法
@@ -52,6 +52,9 @@ export default {
         }
     },
     methods:{
+        login(){
+            
+        },
         resetLoginForm(){
             this.$refs.loginFormRef.resetFields();
         }

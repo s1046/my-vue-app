@@ -8,24 +8,61 @@
   <el-form-item label="会员编号" >
      <el-input v-model="formLabelAlign.number" disabled></el-input>
   </el-form-item>
+  <el-form-item label="是否会员" >
+    <div style="display:flex;text-align:left;align-items:center;height:100%;padding-top:12px;">
+    <el-switch
+    v-model="formLabelAlign.isMember"
+    active-color="#13ce66"
+    inactive-color="#ff4949"
+    active-value="1"
+    inactive-value="0"    >
+    </el-switch>
+    </div>
+  </el-form-item>
    <el-form-item label="卡类型">
-    <el-input v-model="formLabelAlign.cardType" ></el-input>
+       <div style="display:flex;text-align:left;">
+             <el-select v-model="formLabelAlign.cardType" placeholder="请选择">
+                <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+                </el-option>
+            </el-select>
+       </div>
+      
   </el-form-item>
   <el-form-item label="剩余次数">
-    <el-input v-model="formLabelAlign.cardLeft" ></el-input>
+    <el-input v-model="formLabelAlign.cardLeft" type="number"></el-input>
   </el-form-item>
   <el-form-item label="卡开始时间">
-    <el-input v-model="formLabelAlign.cardBeginTime" ></el-input>
+      <div style="display:flex;text-align:left;">
+                <el-date-picker 
+        align="left"
+        v-model="formLabelAlign.cardBeginTime"
+        type="date"
+        value-format="yyyy-MM-dd"
+        placeholder="选择日期">
+        </el-date-picker>
+      </div> 
   </el-form-item>
-    <el-form-item label="卡结束时间">
-    <el-input v-model="formLabelAlign.cardEndTime" ></el-input>
+  <el-form-item label="卡结束时间">
+      <div style="display:flex;text-align:left;">
+                <el-date-picker 
+        align="left"
+        v-model="formLabelAlign.cardEndTime"
+        value-format="yyyy-MM-dd"
+        type="date"
+        placeholder="选择日期">
+        </el-date-picker>
+      </div> 
   </el-form-item>
   <el-form-item label="备注">
     <el-input v-model="formLabelAlign.remark"></el-input>
   </el-form-item>
 
    <el-form-item>
-    <el-button type="primary" @click="onSubmit">提交</el-button>   
+     <el-button type="primary" @click="onSubmit">提交</el-button>   
      <el-button @click="cancel">取消</el-button>
   </el-form-item>
 </el-form>
@@ -34,14 +71,9 @@
 <script>
   export default {
     data() {
-      return {     
-        formLabelAlign: {
-          name: '',
-          region: '',
-          type: '',
-          nickName:'',
-          avatarUrl:''
-        }
+      return {    
+          options:[{value:'基础卡','lable':'基础卡'},{value:'月卡','lable':'月卡'},{value:'长期卡','lable':'长期卡'},{value:'次卡','lable':'次卡'}], 
+          formLabelAlign: {}
       };
     },
     mounted(){
@@ -55,18 +87,35 @@
 
       cloud.init()
       const db = cloud.database()
-      db.collection('users').doc(id).get().then(res=>{
-      
-          this.formLabelAlign=res.data
-        
+      this.db=db;
+      db.collection('users').doc(id).get().then(res=>{      
+          this.formLabelAlign=res.data  
+          debugger      
       })
-     
-       
     },
     methods:{
-        onSubmit(){},
+        onSubmit(){      
+            var that=this;
+            let data=this.formLabelAlign
+            let id=data._id
+            var param = {...data}
+            delete param._id
+            this.db.collection('users').doc(id).update({
+                data:param,
+                success: function(res) {                                  
+                     that.$message({
+                        message: '更新成功',
+                        type: 'success'
+                    });
+
+                    setTimeout(function(){
+                       that.$router.go(-1)
+                    },1000)
+                }
+          })            
+        },
         cancel(){
-             this.$router.go(-1)
+            this.$router.go(-1)
         }
     }
   }

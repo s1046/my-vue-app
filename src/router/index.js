@@ -7,6 +7,14 @@ import VueRouter from 'vue-router'
 import Table from '../components/Table'
 import Login from '../components/Login'
 import Edit from '../components/Edit'
+import Daka from '../components/Daka.vue'
+
+// 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
+const originalPush = VueRouter.prototype.push
+   VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
+
  
 // 第二步创建router实例对象并暴露
 export default new VueRouter({
@@ -28,7 +36,13 @@ export default new VueRouter({
             path: "/edit",
             //跳转的组件
             component: Edit
-        }     
+        },
+        {
+            // path是路径
+            path: "/daka",
+            //跳转的组件
+            component: Daka
+        }        
     ]
 })
 // 然后去main.js中引入router实例
