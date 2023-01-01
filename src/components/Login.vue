@@ -10,7 +10,7 @@
       </el-form-item>
       <!-- 密碼 -->
         <el-form-item prop="password">
-         <el-input v-model="loginFrom.password">
+         <el-input  type="password" v-model="loginFrom.password">
          </el-input>
       </el-form-item>
       <!-- 按鈕 -->
@@ -51,9 +51,37 @@ export default {
     }
         }
     },
+    mounted(){
+          var cloud = new this.cloud.Cloud({
+            // 必填，表示是未登录模式
+            identityless: true,
+            resourceAppid: this.APPID,       
+            resourceEnv: this.ENVID
+       })
+      cloud.init()
+      const db = cloud.database()
+      this.db=db  
+
+      if(window.localStorage.getItem("token")){
+           this.$router.push({
+             path:'/table'                       
+          })
+      }       
+       
+    },
     methods:{
         login(){
-            
+           this.db.collection('admin').where({
+               username:this.username,
+               password:this.password
+           }).get().then(res=>{
+               if(res.data.length>0){
+                   window.localStorage.setItem("token",this.username)
+                   this.$router.push({
+                        path:'/table'                       
+                   })
+               }
+           })
         },
         resetLoginForm(){
             this.$refs.loginFormRef.resetFields();
