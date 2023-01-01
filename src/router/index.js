@@ -17,7 +17,7 @@ const originalPush = VueRouter.prototype.push
 
  
 // 第二步创建router实例对象并暴露
-export default new VueRouter({
+const router= new VueRouter({
     routes: [
         {
             // path是路径
@@ -43,6 +43,21 @@ export default new VueRouter({
             //跳转的组件
             component: Daka
         }        
-    ]
+    ]   
+})
+
+router.beforeEach((to,from,next)=>{
+   if(to.fullPath=='/'){
+       next()
+   }else{
+       if(window.localStorage.getItem('token')){
+           next()
+       }else{
+          next({
+            path:'/'
+          })  
+       }          
+   }
 })
 // 然后去main.js中引入router实例
+export default router
