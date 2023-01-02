@@ -2,8 +2,8 @@
 <div>
 <div style="margin: 20px;"></div>
 <el-form label-position="right" label-width="120px" :model="formLabelAlign">
-  <el-form-item label="昵称" >
-    <el-input v-model="formLabelAlign.nickName" disabled></el-input>
+  <el-form-item label="姓名" >
+    <el-input v-model="formLabelAlign.nickName" ></el-input>
   </el-form-item>
   <el-form-item label="会员编号" >
      <el-input v-model="formLabelAlign.number" ></el-input>

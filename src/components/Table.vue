@@ -14,7 +14,7 @@
     <el-table  ref="multipleTable" style="width: 100%" stripe border highlight-current-row :data="userList"  @selection-change="handleSelectionChange">
       <el-table-column  type="selection"  width="55"></el-table-column>     
       <el-table-column align="center" prop="number"   label="会员编号" ></el-table-column>
-     
+      <el-table-column align="center" prop="nickName"   label="姓名" ></el-table-column>
       <el-table-column label="是否会员">
       <template slot-scope="scope">
         <el-switch
