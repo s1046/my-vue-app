@@ -108,7 +108,6 @@ export default {
         if(this.number){
             param.number=this.number
         } 
-        debugger
         let userList=[]    
         this.cloud.callFunction({
           name: 'quickstartFunctions',      

@@ -89,30 +89,51 @@
       const db = cloud.database()
       this.db=db;
       db.collection('users').doc(id).get().then(res=>{      
-          this.formLabelAlign=res.data  
-          debugger      
+          this.formLabelAlign=res.data                  
       })
     },
     methods:{
-        onSubmit(){      
+       async onSubmit(){      
             var that=this;
             let data=this.formLabelAlign
             let id=data._id
             var param = {...data}
-            delete param._id
-            this.db.collection('users').doc(id).update({
+            delete param._id 
+            const _ = this.db.command         
+
+            let result= await this.db.collection('users').where({
+               number:param.number,
+               openId:_.nin([param.openId])
+            }).get().then(res=>{                 
+                 if(res.data.length>0){
+                      this.$message({
+                          message: '会员编号重复',
+                          type: 'error'
+                      });
+                      return 0
+                 }else{
+                   return 1
+                 }                
+            })
+
+            if(result==1){
+              this.db.collection('users').doc(id).update({
                 data:param,
                 success: function(res) {                                  
                      that.$message({
                         message: '更新成功',
                         type: 'success'
-                    });
+                      });
 
                     setTimeout(function(){
                        that.$router.go(-1)
                     },1000)
                 }
-          })            
+               })            
+
+            }
+            
+            
         },
         cancel(){
             this.$router.go(-1)
