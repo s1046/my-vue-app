@@ -49,7 +49,7 @@
       title="今日打卡记录"
       :visible.sync="dialogVisible"
       width="30%"
-      :before-close="handleClose">      
+      >      
 
        <el-table  ref="multipleTable" style="width: 100%" stripe border highlight-current-row :data="dakaList"  >     
           <el-table-column align="center" prop="number"   label="会员编号" ></el-table-column>
@@ -115,7 +115,10 @@ export default {
         }).then(res=>{            
             if(res.result.list.length>0){
               res.result.list.forEach(item=>{
-                  userList.push(item.user[0])     
+                 if(item.user.length>0){
+                     userList.push(item.user[0])    
+                 }
+                  
               })                      
               this.userList=userList           
             }else{

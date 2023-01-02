@@ -92,7 +92,7 @@ export default {
   },
   methods:{ 
     lookForDakaData (row){
-        this.$refs.DakaPopup.openPop(row.number)
+        this.$refs.DakaPopup.openPop(row.openId)
     },
     deleteData:function(){
       let that=this;
@@ -140,10 +140,12 @@ export default {
         this.totalCount=number  
     },
     getList(){
+      debugger
       var that=this;
       var collection=this.db.collection('users') 
       if(this.number){
         collection=collection.where({number:this.number})
+        .orderBy('registerDate','desc')
         .skip((this.pageNo-1)*this.pageSize)
         .limit(this.pageSize)
         .get({
@@ -154,6 +156,7 @@ export default {
         })
       }else{
          collection=collection
+        .orderBy('registerDate','desc')
         .skip((this.pageNo-1)*this.pageSize)
         .limit(this.pageSize)
         .get({

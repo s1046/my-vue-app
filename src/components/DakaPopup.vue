@@ -4,7 +4,7 @@
       title="打卡记录"
       :visible.sync="show"
       width="40%"      
-      :before-close="handleClose">
+      >
        <div style="text-align:left;">
           <el-form label-position="left" :inline="true" class="demo-form-inline">
             <el-form-item label="打卡日期">
@@ -99,7 +99,7 @@ export default {
     },
      async getCount(no){
         var param={}
-        param.number=no
+        param.openId=no
         if(this.selectDate){
            param.daka_date=this.selectDate
         } 
@@ -110,7 +110,7 @@ export default {
     getList(number){     
       var that=this;
       var param={}
-      param.number=number
+      param.openId=number
       if(this.selectDate){
          param.daka_date=this.selectDate
       }     
