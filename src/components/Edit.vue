@@ -72,7 +72,7 @@
   export default {
     data() {
       return {    
-          options:[{value:'基础卡','lable':'基础卡'},{value:'月卡','lable':'月卡'},{value:'长期卡','lable':'长期卡'},{value:'次卡','lable':'次卡'}], 
+          options:[{value:'小时卡','lable':'小时卡'},{value:'月卡','lable':'月卡'},{value:'长期卡','lable':'长期卡'},{value:'次卡','lable':'次卡'}], 
           formLabelAlign: {}
       };
     },
