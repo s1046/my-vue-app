@@ -108,14 +108,17 @@ export default {
         if(this.number){
             param.number=this.number
         } 
+        debugger
         let userList=[]    
         this.cloud.callFunction({
           name: 'quickstartFunctions',      
           data:param
-        }).then(res=>{ 
+        }).then(res=>{            
             if(res.result.list.length>0){
-                userList.push(res.result.list[0].user[0])           
-                this.userList=userList           
+              res.result.list.forEach(item=>{
+                  userList.push(item.user[0])     
+              })                      
+              this.userList=userList           
             }else{
               this.userList=[]
             }            

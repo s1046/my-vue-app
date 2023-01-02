@@ -6,7 +6,7 @@
     <el-input v-model="formLabelAlign.nickName" disabled></el-input>
   </el-form-item>
   <el-form-item label="会员编号" >
-     <el-input v-model="formLabelAlign.number" disabled></el-input>
+     <el-input v-model="formLabelAlign.number" ></el-input>
   </el-form-item>
   <el-form-item label="是否会员" >
     <div style="display:flex;text-align:left;align-items:center;height:100%;padding-top:12px;">
@@ -21,7 +21,7 @@
   </el-form-item>
    <el-form-item label="卡类型">
        <div style="display:flex;text-align:left;">
-             <el-select v-model="formLabelAlign.cardType" placeholder="请选择">
+             <el-select v-model="formLabelAlign.cardType" placeholder="请选择"  clearable filterable allow-create default-first-option >
                 <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -33,7 +33,7 @@
       
   </el-form-item>
   <el-form-item label="剩余次数">
-    <el-input v-model="formLabelAlign.cardLeft" type="number"></el-input>
+    <el-input v-model="formLabelAlign.cardLeft" ></el-input>
   </el-form-item>
   <el-form-item label="卡开始时间">
       <div style="display:flex;text-align:left;">

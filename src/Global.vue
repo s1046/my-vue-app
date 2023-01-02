@@ -1,6 +1,6 @@
 <script>
-const APPID='wx751f9b34cbfd4fef';
-const ENVID='cloud1-8gupzdmcdb84088b';
+const APPID='wxa8de1d48a1506563';
+const ENVID='cloud1-3gokuk1077bdb1a0';
 export default {
   APPID, // 用户token身份
   ENVID // 用户登录状态
